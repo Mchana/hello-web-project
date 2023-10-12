@@ -6,6 +6,23 @@ app = Flask(__name__)
 
 # == Your Routes Here ==
 
+@app.route('/count_vowels', methods = ['POST'])
+def count_vowels():
+    text = request.form['text']
+    vowel = 0
+    for t in text:
+        if t.lower() in "aeiou":
+            vowel = vowel + 1
+
+    return f'There are {vowel} vowels in "{text}"'
+
+@app.route('/sort-names', methods = ['POST'])
+def sort_names():
+    names = request.form['names']
+    names_list = names.split(",")
+    names_list.sort()
+    return ','.join(names_list)
+
 # == Example Code Below ==
 
 # GET /emoji
