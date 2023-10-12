@@ -6,6 +6,18 @@ app = Flask(__name__)
 
 # == Your Routes Here ==
 
+@app.route('/names', methods = ['GET'])
+def get_names():
+    names_list = ['Julia,Alice,Karim']
+    name = request.args.get('name',None)
+
+    if name == None:
+        return "please give a name"
+    else:
+        
+        names_list.append(name)
+        return ",".join(names_list)
+
 @app.route('/count_vowels', methods = ['POST'])
 def count_vowels():
     text = request.form['text']

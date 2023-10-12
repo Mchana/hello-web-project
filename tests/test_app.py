@@ -1,5 +1,27 @@
 # Tests for your routes go here
 
+"""when i make a GET request to /names
+and i send nothing
+then i should get a 200 response """
+
+def test_get_names_nothing(web_client):
+    response = web_client.get('/names')
+    assert response.status_code == 200
+    assert response.data.decode('utf-8') == "please give a name"
+
+"""when i make a GET request to names
+and i send names=Dana
+then i should get a 200 response and "Julia, Alice, Karim,Dana"""
+
+def test_get_names(web_client):
+    response = web_client.get('/names?name=Dana')
+    assert response.status_code == 200
+    assert response.data.decode('utf-8') == "Julia,Alice,Karim,Dana"
+
+"""when i make a GET request to names
+and i send names=Matt,John
+then i should get a 200 response and "Alice,John,Julia,Karim,Matt"""
+
 """when i make a POST request to /sort-names
 and i send names=Joe,Alice,Zoe,Julia,Kieran
 then i should get a 200 reponse with the list of names sorted"""
